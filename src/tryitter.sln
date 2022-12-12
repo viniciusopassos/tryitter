@@ -5,9 +5,9 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8D26D12F-E495-419D-AAE6-080F0DD0C2B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tryitter", "src\tryitter\tryitter.csproj", "{E3ABF23C-64CB-45DD-AEEA-8C5D5F16393E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tryitter", "\tryitter\tryitter.csproj", "{E3ABF23C-64CB-45DD-AEEA-8C5D5F16393E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tryitter.Test", "src\tryitter.Test\tryitter.Test.csproj", "{C11AF653-0424-4DD4-B29D-AA14AC1E073D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tryitter.Test", "\tryitter.Test\tryitter.Test.csproj", "{C11AF653-0424-4DD4-B29D-AA14AC1E073D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
