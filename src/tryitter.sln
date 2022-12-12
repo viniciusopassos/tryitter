@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8D26D12F-E495-419D-AAE6-080F0DD0C2B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tryitter", "src\tryitter\tryitter.csproj", "{E3ABF23C-64CB-45DD-AEEA-8C5D5F16393E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tryitter.Test", "src\tryitter.Test\tryitter.Test.csproj", "{C11AF653-0424-4DD4-B29D-AA14AC1E073D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E3ABF23C-64CB-45DD-AEEA-8C5D5F16393E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3ABF23C-64CB-45DD-AEEA-8C5D5F16393E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3ABF23C-64CB-45DD-AEEA-8C5D5F16393E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3ABF23C-64CB-45DD-AEEA-8C5D5F16393E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C11AF653-0424-4DD4-B29D-AA14AC1E073D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C11AF653-0424-4DD4-B29D-AA14AC1E073D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C11AF653-0424-4DD4-B29D-AA14AC1E073D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C11AF653-0424-4DD4-B29D-AA14AC1E073D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E3ABF23C-64CB-45DD-AEEA-8C5D5F16393E} = {8D26D12F-E495-419D-AAE6-080F0DD0C2B4}
+		{C11AF653-0424-4DD4-B29D-AA14AC1E073D} = {8D26D12F-E495-419D-AAE6-080F0DD0C2B4}
+	EndGlobalSection
+EndGlobal
