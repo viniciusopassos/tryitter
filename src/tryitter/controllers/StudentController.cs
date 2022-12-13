@@ -1,7 +1,6 @@
 using tryitter.Context;
 using tryitter.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
 using tryitter.Requesties;
 using Microsoft.EntityFrameworkCore;
 using tryitter.Services;
@@ -10,7 +9,6 @@ namespace tryitter.controllers
 {
     [ApiController]
     [Route("[Controller]")]
-    [Authorize]
     public class StudentController : ControllerBase
     {
         private readonly TryitterContext _context;
@@ -30,6 +28,13 @@ namespace tryitter.controllers
             var newAuthentication = new Authentication { Token = token };
 
             return Ok(newAuthentication);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<Student>>> GetAll()
+        {
+            var students = await _context.Students.ToListAsync();
+            return Ok(students);
         }
 
         [HttpPost]
