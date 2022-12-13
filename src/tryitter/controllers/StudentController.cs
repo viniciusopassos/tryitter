@@ -22,7 +22,7 @@ namespace tryitter.controllers
         {
             var student = await _context.Students.FirstOrDefaultAsync(x => x.Email == login.Email);
 
-            if(student == null || student.Password != login.Password) throw new DbUpdateException("Student not found!");
+            if(student == null || student.Password != login.Password) throw new DbUpdateException("Student Not Found!");
 
             var token = new TokenGenerator().Generate(student);
             var newAuthentication = new Authentication { Token = token };
@@ -48,9 +48,35 @@ namespace tryitter.controllers
             catch (InvalidOperationException err)
             {
                 Console.WriteLine(err.Message);
-                return NotFound("Student not found!");
+                return NotFound("Student Not Found!");
             }   
 
+        }
+
+        [HttpPut("{studentId}")]
+        public async Task<ActionResult<Student>> Update(int studentId, Student student)
+        {
+            try
+            {
+                var studentDb = await _context.Students.FirstAsync(s => s.StudentId == studentId);
+
+                if(studentDb == null) throw new ArgumentException("Student Not Found!");
+
+                studentDb.Name = student.Name;
+                studentDb.Email = student.Email;
+                studentDb.Password = student.Password; 
+                studentDb.CurrentModule = student.CurrentModule;
+                studentDb.status = student.status;
+
+                _context.Students.Update(studentDb);
+                await _context.SaveChangesAsync();
+                return Ok(studentDb);
+            }
+            catch (ArgumentException err)
+            {
+                Console.WriteLine(err.Message);
+                return NotFound("Student Not Found!");
+            }
         }
 
         [HttpPost]
