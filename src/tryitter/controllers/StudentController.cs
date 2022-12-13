@@ -37,6 +37,22 @@ namespace tryitter.controllers
             return Ok(students);
         }
 
+        [HttpGet("{studentId}")]
+        public async Task<ActionResult<Student>> GetById(int studentId)
+        {
+            try
+            {
+                var student = await _context.Students.Where(s => s.StudentId == studentId).FirstAsync();
+                return Ok(student);
+            }
+            catch (InvalidOperationException err)
+            {
+                Console.WriteLine(err.Message);
+                return NotFound("Student not found!");
+            }   
+
+        }
+
         [HttpPost]
         public async Task<ActionResult<Student>> Create(Student student)
         {
