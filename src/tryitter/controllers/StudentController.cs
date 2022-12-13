@@ -79,6 +79,24 @@ namespace tryitter.controllers
             }
         }
 
+        [HttpDelete("{studentId}")]
+        public async Task<ActionResult<Student>> Remove(int studentId)
+        {
+            try
+            {
+                var student = await _context.Students.Where(s => s.StudentId == studentId).FirstAsync();
+
+                _context.Students.Remove(student);
+                await _context.SaveChangesAsync();
+                return NoContent();
+            }
+            catch (InvalidOperationException err)
+            {
+                Console.WriteLine(err.Message);
+                return NotFound("Student Not Found!");
+            }
+        }
+
         [HttpPost]
         public async Task<ActionResult<Student>> Create(Student student)
         {
