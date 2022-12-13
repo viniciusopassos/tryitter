@@ -12,6 +12,6 @@ namespace tryitter.Models
         public string Url { get; set; } = default!;
         [ForeignKey("StudentId")]
         public int StudentId { get; set; }
-        public virtual Student Student { get; set; } = default!;
+        public Student Student { get; set; }
     }
 }
