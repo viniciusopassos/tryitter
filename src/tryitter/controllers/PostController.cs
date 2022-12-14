@@ -45,6 +45,16 @@ namespace tryitter.controllers
             }   
         }
 
+        [HttpGet("AllByStudent/{studentId}")]
+        public async Task<ActionResult<List<Post>>> GetAllPostsByStudent(int studentId)
+        {
+            var studentAllPosts = await _context.Posts.Where(s => s.StudentId == studentId).ToListAsync();
+
+            if (studentAllPosts.Count == 0) return NotFound("Posts Not Found!");
+
+            return Ok(studentAllPosts);
+        }
+
         [HttpPost]
         public async Task<ActionResult<Post>> Create(Post post)
         {
