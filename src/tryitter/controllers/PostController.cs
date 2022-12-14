@@ -69,6 +69,19 @@ namespace tryitter.controllers
             return Ok(postBD);
         }
 
+        [HttpDelete("{postId}")]
+        public async Task<ActionResult<Post>> Delete(int postId)
+        {
+            var post = await _context.Posts.FirstAsync(s => s.PostId == postId);
+
+            if (post == null) return NotFound("Post Not Found!");
+
+            _context.Posts.Remove(post);
+            await _context.SaveChangesAsync();
+
+            return Ok(post);
+        }
+
         [HttpPost]
         public async Task<ActionResult<Post>> Create(Post post)
         {
