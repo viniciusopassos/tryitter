@@ -22,7 +22,7 @@ namespace tryitter.controllers
         {
             var student = await _context.Students.FirstOrDefaultAsync(x => x.Email == login.Email);
 
-            if(student == null || student.Password != login.Password) throw new DbUpdateException("Student Not Found!");
+            if(student == null || student.Password != login.Password) throw new DbUpdateException("Email or Password invalid!");
 
             var token = new TokenGenerator().Generate(student);
             var newAuthentication = new Authentication { Token = token };
@@ -58,19 +58,19 @@ namespace tryitter.controllers
         {
             try
             {
-                var studentDb = await _context.Students.FirstAsync(s => s.StudentId == studentId);
+                var studentBD = await _context.Students.FirstAsync(s => s.StudentId == studentId);
 
-                if(studentDb == null) throw new ArgumentException("Student Not Found!");
+                if(studentBD == null) throw new ArgumentException("Student Not Found!");
 
-                studentDb.Name = student.Name;
-                studentDb.Email = student.Email;
-                studentDb.Password = student.Password; 
-                studentDb.CurrentModule = student.CurrentModule;
-                studentDb.status = student.status;
+                studentBD.Name = student.Name;
+                studentBD.Email = student.Email;
+                studentBD.Password = student.Password; 
+                studentBD.CurrentModule = student.CurrentModule;
+                studentBD.status = student.status;
 
-                _context.Students.Update(studentDb);
+                _context.Students.Update(studentBD);
                 await _context.SaveChangesAsync();
-                return Ok(studentDb);
+                return Ok(studentBD);
             }
             catch (ArgumentException err)
             {

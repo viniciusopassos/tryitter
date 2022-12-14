@@ -55,6 +55,20 @@ namespace tryitter.controllers
             return Ok(studentAllPosts);
         }
 
+        [HttpPut("{postId}")]
+        public async Task<ActionResult<Post>> Update(int postId, Post post)
+        {
+            var postBD = await _context.Posts.FirstAsync(s => s.PostId == postId);
+
+            if (post == null) return NotFound("Post Not Found!");
+
+            postBD.Url = post.Url;
+            postBD.Content = post.Content;
+
+            await _context.SaveChangesAsync();
+            return Ok(postBD);
+        }
+
         [HttpPost]
         public async Task<ActionResult<Post>> Create(Post post)
         {
