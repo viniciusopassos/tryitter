@@ -18,7 +18,7 @@ namespace tryitter.Services
                 Subject = AddClaims(student),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Secret)), 
                 SecurityAlgorithms.HmacSha256Signature),
-                Expires = DateTime.Now.AddDays(1)
+                Expires = DateTime.Now.AddDays(10)
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);

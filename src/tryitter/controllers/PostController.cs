@@ -18,11 +18,31 @@ namespace tryitter.controllers
         [HttpGet]
         public async Task<ActionResult<List<Post>>> GetAll()
         {
-            var posts = await _context.Posts.ToListAsync();
+            try
+            {
+                var posts = await _context.Posts.ToListAsync();
+                return Ok(posts);
+            }
+            catch (InvalidOperationException err)
+            {
+                Console.WriteLine(err.Message);
+                return NotFound("Posts Not Found!");
+            }              
+        }
 
-            if (posts == null) return NotFound("Posts Not Found!");
-
-            return Ok(posts);
+        [HttpGet("{postId}")]
+        public async Task<ActionResult<Post>> GetById(int postId)
+        {
+            try
+            {
+                var post = await _context.Posts.FirstOrDefaultAsync(p => p.PostId == postId);
+                return Ok(post);
+            }
+            catch (InvalidOperationException err)
+            {
+                Console.WriteLine(err.Message);
+                return NotFound("Post Not Found!");
+            }   
         }
 
         [HttpPost]
@@ -30,7 +50,7 @@ namespace tryitter.controllers
         {
             _context.Posts.Add(post);
             await _context.SaveChangesAsync();
-            return new CreatedAtRouteResult("GetById", new { id = post.PostId}, post);
+            return Ok(post);
         }
     }
 }
