@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using tryitter.Context;
 using tryitter.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace tryitter.controllers
 {
@@ -18,12 +15,22 @@ namespace tryitter.controllers
             _context = context;
         }
 
+        [HttpGet]
+        public async Task<ActionResult<List<Post>>> GetAll()
+        {
+            var posts = await _context.Posts.ToListAsync();
+
+            if (posts == null) return NotFound("Posts Not Found!");
+
+            return Ok(posts);
+        }
+
         [HttpPost]
         public async Task<ActionResult<Post>> Create(Post post)
         {
             _context.Posts.Add(post);
             await _context.SaveChangesAsync();
-            return post;
+            return new CreatedAtRouteResult("GetById", new { id = post.PostId}, post);
         }
     }
 }
