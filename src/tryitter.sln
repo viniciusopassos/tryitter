@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tryitter", "tryitter\tryitter.csproj", "{4E098590-C00B-40C2-BDA9-0254E7B998DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tryitter.Test", "tryitter.Test\tryitter.Test.csproj", "{7CD7F6A2-EC43-4B5C-BA02-AE843D42C8E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,6 +20,10 @@ Global
 		{4E098590-C00B-40C2-BDA9-0254E7B998DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E098590-C00B-40C2-BDA9-0254E7B998DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E098590-C00B-40C2-BDA9-0254E7B998DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CD7F6A2-EC43-4B5C-BA02-AE843D42C8E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CD7F6A2-EC43-4B5C-BA02-AE843D42C8E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CD7F6A2-EC43-4B5C-BA02-AE843D42C8E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CD7F6A2-EC43-4B5C-BA02-AE843D42C8E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
