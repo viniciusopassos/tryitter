@@ -66,7 +66,7 @@ namespace tryitter.controllers
                 studentBD.Email = student.Email;
                 studentBD.Password = student.Password; 
                 studentBD.CurrentModule = student.CurrentModule;
-                studentBD.status = student.status;
+                studentBD.Status = student.Status;
 
                 _context.Students.Update(studentBD);
                 await _context.SaveChangesAsync();

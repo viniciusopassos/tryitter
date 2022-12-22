@@ -11,7 +11,7 @@ namespace tryitter.Models
         public string Email { get; set; } = default!;
         public string Password { get; set; } = default!;
         public string CurrentModule { get; set; } = default!;
-        public string status { get; set; } = default!;
+        public string Status { get; set; } = default!;
         [JsonIgnore]
         public ICollection<Post>? Posts { get; }
     }
