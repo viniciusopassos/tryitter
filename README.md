@@ -1,5 +1,7 @@
 # tryitter
 
+### Evidência de funcionamento: https://1drv.ms/u/s!AnRiLk1UjnTwiDxs2-yoNLVlz3B4?e=RAeLgo
+
 ## Descrição
 Esse Projeto busca simular a API de uma rede social(twitter), totalmente baseada em texto. O objetivo é proporcionar um ambiente em que as pessoas estudantes poderão, por meio de textos e imagens, compartilhar suas experiências e também acessar posts que possam contribuir para seu aprendizado.
 
