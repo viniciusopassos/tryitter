@@ -1,9 +1,7 @@
 using tryitter.Context;
 using tryitter.Models;
 using Microsoft.AspNetCore.Mvc;
-using tryitter.Requesties;
 using Microsoft.EntityFrameworkCore;
-using tryitter.Services;
 
 namespace tryitter.controllers
 {
@@ -17,19 +15,6 @@ namespace tryitter.controllers
             _context = context;
         }
 
-        [HttpPost("/Login")]
-        public async Task<ActionResult<Authentication>> Login(StudentLogin login)
-        {
-            var student = await _context.Students.FirstOrDefaultAsync(x => x.Email == login.Email);
-
-            if(student == null || student.Password != login.Password) throw new DbUpdateException("Email or Password invalid!");
-
-            var token = new TokenGenerator().Generate(student);
-            var newAuthentication = new Authentication { Token = token };
-
-            return Ok(newAuthentication);
-        }
-
         [HttpGet]
         public async Task<ActionResult<List<Student>>> GetAll()
         {
@@ -37,34 +22,42 @@ namespace tryitter.controllers
             return Ok(students);
         }
 
-        [HttpGet("{studentId}")]
-        public async Task<ActionResult<Student>> GetById(int studentId)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Student>> GetById(int id)
         {
             try
             {
-                var student = await _context.Students.Where(s => s.StudentId == studentId).FirstAsync();
+                var student = await _context.Students.Where(s => s.StudentId == id).FirstAsync();
                 return Ok(student);
             }
             catch (InvalidOperationException err)
             {
                 Console.WriteLine(err.Message);
                 return NotFound("Student Not Found!");
-            }   
+            }
 
         }
 
-        [HttpPut("{studentId}")]
-        public async Task<ActionResult<Student>> Update(int studentId, Student student)
+        [HttpPost]
+        public async Task<ActionResult<Student>> Create(Student student)
+        {
+            _context.Students.Add(student);
+            await _context.SaveChangesAsync();
+            return Ok(student);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Student>> Update(int id, Student student)
         {
             try
             {
-                var studentBD = await _context.Students.FirstAsync(s => s.StudentId == studentId);
+                var studentBD = await _context.Students.FirstAsync(s => s.StudentId == id);
 
-                if(studentBD == null) throw new ArgumentException("Student Not Found!");
+                if (studentBD == null) throw new ArgumentException("Student Not Found!");
 
                 studentBD.Name = student.Name;
                 studentBD.Email = student.Email;
-                studentBD.Password = student.Password; 
+                studentBD.Password = student.Password;
                 studentBD.CurrentModule = student.CurrentModule;
                 studentBD.status = student.status;
 
@@ -72,19 +65,19 @@ namespace tryitter.controllers
                 await _context.SaveChangesAsync();
                 return Ok(studentBD);
             }
-            catch (ArgumentException err)
+            catch (InvalidOperationException err)
             {
                 Console.WriteLine(err.Message);
                 return NotFound("Student Not Found!");
             }
         }
 
-        [HttpDelete("{studentId}")]
-        public async Task<ActionResult<Student>> Remove(int studentId)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Student>> Remove(int id)
         {
             try
             {
-                var student = await _context.Students.Where(s => s.StudentId == studentId).FirstAsync();
+                var student = await _context.Students.Where(s => s.StudentId == id).FirstAsync();
 
                 _context.Students.Remove(student);
                 await _context.SaveChangesAsync();
@@ -95,14 +88,6 @@ namespace tryitter.controllers
                 Console.WriteLine(err.Message);
                 return NotFound("Student Not Found!");
             }
-        }
-
-        [HttpPost]
-        public async Task<ActionResult<Student>> Create(Student student)
-        {
-            _context.Students.Add(student);
-            await _context.SaveChangesAsync();
-            return Ok(student);
         }
     }
 }

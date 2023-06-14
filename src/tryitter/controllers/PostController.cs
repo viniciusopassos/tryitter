@@ -27,59 +27,7 @@ namespace tryitter.controllers
             {
                 Console.WriteLine(err.Message);
                 return NotFound("Posts Not Found!");
-            }              
-        }
-
-        [HttpGet("{postId}")]
-        public async Task<ActionResult<Post>> GetById(int postId)
-        {
-            try
-            {
-                var post = await _context.Posts.FirstOrDefaultAsync(p => p.PostId == postId);
-                return Ok(post);
             }
-            catch (InvalidOperationException err)
-            {
-                Console.WriteLine(err.Message);
-                return NotFound("Post Not Found!");
-            }   
-        }
-
-        [HttpGet("AllByStudent/{studentId}")]
-        public async Task<ActionResult<List<Post>>> GetAllPostsByStudent(int studentId)
-        {
-            var studentAllPosts = await _context.Posts.Where(s => s.StudentId == studentId).ToListAsync();
-
-            if (studentAllPosts.Count == 0) return NotFound("Posts Not Found!");
-
-            return Ok(studentAllPosts);
-        }
-
-        [HttpPut("{postId}")]
-        public async Task<ActionResult<Post>> Update(int postId, Post post)
-        {
-            var postBD = await _context.Posts.FirstAsync(s => s.PostId == postId);
-
-            if (post == null) return NotFound("Post Not Found!");
-
-            postBD.Url = post.Url;
-            postBD.Content = post.Content;
-
-            await _context.SaveChangesAsync();
-            return Ok(postBD);
-        }
-
-        [HttpDelete("{postId}")]
-        public async Task<ActionResult<Post>> Delete(int postId)
-        {
-            var post = await _context.Posts.FirstAsync(s => s.PostId == postId);
-
-            if (post == null) return NotFound("Post Not Found!");
-
-            _context.Posts.Remove(post);
-            await _context.SaveChangesAsync();
-
-            return Ok(post);
         }
 
         [HttpPost]
@@ -88,6 +36,81 @@ namespace tryitter.controllers
             _context.Posts.Add(post);
             await _context.SaveChangesAsync();
             return Ok(post);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Post>> GetById(int id)
+        {
+            try
+            {
+                var post = await _context.Posts.FirstOrDefaultAsync(p => p.PostId == id);
+                if (post == null) return NotFound("Post Not Found!");
+                return Ok(post);
+            }
+            catch (InvalidOperationException err)
+            {
+                Console.WriteLine(err.Message);
+                return NotFound("Post Not Found!");
+            }
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Post>> Update(int id, Post post)
+        {
+            try
+            {
+                var postBD = await _context.Posts.FirstAsync(s => s.PostId == id);
+                if (post == null) return NotFound("Post Not Found!");
+
+                postBD.Url = post.Url;
+                postBD.Content = post.Content;
+
+                await _context.SaveChangesAsync();
+                return Ok(postBD);
+
+
+
+            }
+            catch (InvalidOperationException err)
+            {
+                Console.WriteLine(err.Message);
+                return NotFound("Post Not Found!");
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Post>> Delete(int id)
+        {
+            try
+            {
+                var post = await _context.Posts.FirstAsync(s => s.PostId == id);
+                if (post == null) return NotFound("Post Not Found!");
+
+                _context.Posts.Remove(post);
+                await _context.SaveChangesAsync();
+                return Ok(post);
+            }
+            catch (InvalidOperationException err)
+            {
+                Console.WriteLine(err.Message);
+                return NotFound("Post Not Found!");
+            }
+        }
+
+        [HttpGet("AllByStudent/{id}")]
+        public async Task<ActionResult<List<Post>>> GetAllPostsByStudent(int id)
+        {
+            try
+            {
+                var studentAllPosts = await _context.Posts.Where(s => s.StudentId == id).ToListAsync();
+                if (studentAllPosts.Count == 0) return NotFound("Posts Not Found!");
+                return Ok(studentAllPosts);
+            }
+            catch (InvalidOperationException err)
+            {
+                Console.WriteLine(err.Message);
+                return NotFound("Posts Not Found!");
+            }
         }
     }
 }
